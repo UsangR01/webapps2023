@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    PayApp Dashboard
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Overview</h5>
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-primary btn-lg mb-2 font-weight-bold" href="{% url 'fund_request_list' %}">View Fund Requests</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-primary btn-lg mb-2 font-weight-bold" href="{% url 'notifications:notification_list' %}">List of Notifications</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-primary btn-lg mb-2 font-weight-bold" href="#">Transactions</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-primary btn-lg mb-2 font-weight-bold" href="{% url 'generate_plot' %}">Reports</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                {# Include the plot_template without the navbar here #}
+                {% block navbar %}{% endblock %}
+                {{ plot_html | safe }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

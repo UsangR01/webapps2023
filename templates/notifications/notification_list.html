@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h1>Notifications</h1>
+    {% if notifications %}
+        <form id="notification-form" method="post" action="{% url 'notifications:notification_delete_multiple' %}">
+            {% csrf_token %}
+            <ul>
+                {% for notification in notifications %}
+                    <li{% if not notification.is_read %} class="unread"{% endif %}>
+                        <input type="checkbox" name="selected_notifications" value="{{ notification.id }}" id="checkbox_{{ notification.id }}">
+                        <label for="checkbox_{{ notification.id }}">
+                            <strong>{{ notification.message }}</strong>
+                            <span class="timestamp">{{ notification.timestamp }}</span>
+                        </label>
+                        {% if not notification.is_read %}
+                            <a href="{% url 'notifications:notification_mark_read' notification.pk %}">Mark as read</a>
+                        {% else %}
+                            <span class="read">Read</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+            <button type="submit">Delete selected notifications</button>
+        </form>
+    {% else %}
+        <p>No notifications.</p>
+    {% endif %}
+{% endblock %}

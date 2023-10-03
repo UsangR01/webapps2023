@@ -1,0 +1,90 @@
+Admin Access:
+=============
+{admin2: Jasmine#316}
+
+url = f"http://127.0.0.1:8000//currency_converter/?amount={amount}&base_currency={base_currency}&quote_currency={quote_currency}"
+
+# Redirect all HTTP requests to HTTPS
+#SECURE_SSL_REDIRECT = True
+
+python manage.py runserver_plus --cert-file 127.0.0.1.crt --key-file 127.0.0.1.key 7000
+
+###pipchecker issue... file>settings>tools>terminal>>>
+shell path: --command "skip commands:pycharm:python -m pipchecker"
+
+###Issue deleting database:
+    1. Close your IDE.
+    2. Open Task Manager (CTRL + SHIFT + ESC) and go to the "Processes" tab.
+    3. Look for any processes related to your project, such as python.exe, and end them by right-clicking and selecting "End task".
+    4. Try deleting the database file again.
+
+If you still cannot delete the file, you may need to restart your computer to release the file.
+
+Database Query syntax:
+
+from transactions.models import *
+wallet = Wallet.objects.all()
+wallet
+
+# Filter Wallet objects based on a specific field:
+Wallet.objects.filter(balance=500)
+
+Wallet.objects.filter(balance=1000)
+
+# To filter the by first wallet:
+first_wallet = Wallet.objects.first()
+first_wallet
+
+# To filter the by last wallet in the table:
+last_wallet = Wallet.objects.last()
+last_wallet
+
+# Order wallet by size:
+small_TO_big = Wallet.objects.order_by('balance')
+small_TO_big
+
+# Order by balance in ascending order
+Wallet.objects.order_by('balance')
+
+# Order by balance in descending order
+Wallet.objects.order_by('-balance')
+
+# Order by created_at in descending order
+Wallet.objects.order_by('-created_at')
+
+# Order by created_at in ascending order
+Wallet.objects.order_by('created_at')
+
+# retrieve all Wallet objects related to User object with a username
+Wallet.objects.filter(user__username='user1')
+
+# similarly to get same where you are sure there's just one object
+Wallet.objects.get(user__username='user1')
+
+# Retrieve a single Wallet object based on its primary key:
+Wallet.objects.get(pk=1)
+
+# Retrieve Wallet objects based on related fields:
+
+from django.contrib.auth.models import User
+user = User.objects.get(username='user3')
+Wallet.objects.filter(user=user)
+
+User.objects.all()
+
+# Retrieve all Wallet objects with a balance greater than 1000
+Wallet.objects.filter(user_balance_gt=1000)
+
+###To update the currency of the Wallet instance, you can simply assign the new value to the currency attribute of the instance and save it to the database.
+
+# Get the user instance
+user = User.objects.get(username='user4')
+
+# Get the wallet instance for the user
+wallet = Wallet.objects.get(user=user)
+
+# Update the currency to "GBP"
+wallet.currency = 'GBP'
+
+# Save the changes to the database
+wallet.save()

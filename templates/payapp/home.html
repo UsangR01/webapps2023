@@ -1,0 +1,82 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Home - PayApp{% endblock %}
+
+{% block content %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                <img src="{% static 'mstile-150x150.png' %}" width="60" height="60" alt="PayApp logo">
+                PayApp
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item" style="margin-right: 10px;">
+                        <a href="/contact" class="btn btn-primary btn-block">Contact</a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 10px;">
+                        <a href="/help" class="btn btn-primary btn-block">Help</a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 10px;">
+                        <a href="/login" class="btn btn-primary btn-block">Login</a>
+                    </li>
+                    <li class="nav-item" style="margin-right: 10px;">
+                        <a href="/register" class="btn btn-primary btn-block">Signup</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="py-5 text-center">
+        <div class="container">
+            <img src="{% static 'payapp_home_image.png' %}" alt="Welcome to PayApp">
+            <h1 class="display-4 mt-3">Welcome to PayApp</h1>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>About Us</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed efficitur bibendum eros, sit amet
+                    suscipit nisi pretium at. Duis malesuada, eros vitae dapibus volutpat, quam est finibus magna,
+                    eget porttitor augue urna eget eros.</p>
+            </div>
+            <div class="col-md-6">
+                <h2>Our Services</h2>
+                <ul>
+                    <li>Secure and fast online payments</li>
+                    <li>24/7 customer support</li>
+                    <li>Easy money transfers</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light py-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>Join us and experience secure and fast online payments.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a class="btn btn-primary" href="/register">Sign up for free</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h1>{{ request.description }}</h1>
+
+    {% if action == 'approve' %}
+        <p>Are you sure you want to approve this request?</p>
+    {% elif action == 'decline' %}
+        <p>Are you sure you want to decline this request?</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="{{ action }}">
+        <button type="submit">Yes</button>
+        <a href="{% url 'fund_request_list' %}">No</a>
+    </form>
+{% endblock %}

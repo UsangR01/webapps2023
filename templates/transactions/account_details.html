@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>Funds Transfer</h1>
+        <h4>Source Account</h4>
+        <p>Username: {{ src_wallet.user.username }}</p>
+        <!-- This is a comment <p>{{ src_transaction_type }} transaction. {{ src_transaction_amount }} points transferred from {{ src_username }} to {{ dst_username }} on {{ src_transaction_date }}</p>-->
+        <table class="table table-bordered table-striped table-hover table-grey">
+            <tr>
+                <th>Recipient</th>
+                <th>Date</th>
+                <th>Amount</th>
+            </tr>
+
+            <tr>
+                <td>{{ dst_username  }}</td>
+                <td>{{ src_transaction_date }}</td>
+                <td>{{ src_transaction_amount }}</td>
+            </tr>
+
+            <tr>
+                <td colspan="2">&nbsp;</td> <!-- empty cells to span the main table columns -->
+                <td colspan="2">
+                    <table class="table table-bordered table-striped table-hover table-dark">
+                        <tr>
+                            <td><strong>Current Balance:</strong></td>
+                            <td><strong>{{ src_sender_balance }} {{ src_wallet.currency }}</strong></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Help - PayApp
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="my-4">Help Center</h1>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Getting Started</h5>
+                        <p class="card-text">Learn how to create an account and make your first payment.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Managing Payments</h5>
+                        <p class="card-text">Find out how to manage your payment methods and view transaction history.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Security & Privacy</h5>
+                        <p class="card-text">Learn about our security measures and how we protect your personal information.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Contact Support</h5>
+                        <p class="card-text">Get in touch with our support team for assistance with any issues.</p>
+                        <a href="{% url 'contact' %}" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">API Documentation</h5>
+                        <p class="card-text">Learn how to integrate our payment system with your application using our API.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Frequently Asked Questions</h5>
+                        <p class="card-text">Find answers to common questions about using our payment system.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

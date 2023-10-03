@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}Send | Request{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+        <h1 class="mb-5">Send | Request</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <a href="{% url 'funds_transfer' %}" class="btn btn-primary btn-lg btn-block">Send Money</a>
+                    </div>
+                    <img src="{% static 'send_fund.png' %}" class="card-img-top" alt="Send Money">
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <a href="{% url 'request_funds' %}" class="btn btn-primary btn-lg btn-block">Request Money</a>
+                    </div>
+                    <img src="{% static 'request_money.png' %}" class="card-img-top" alt="Request Money">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

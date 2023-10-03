@@ -1,0 +1,65 @@
+{% extends 'main/base.html' %}
+{% load mathfilters %}
+
+{% block content %}
+    <h1>Transaction History</h1>
+    <h5>Source Account</h5>
+    <p>Username: {{ user.username }}</p>
+    <table class="table table-bordered table-striped table-hover table-grey">
+        <thead>
+        <tr>
+            <th>Counterparty</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th class="d-none">Transaction Type</th>
+            <th>Direction</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% if user.is_authenticated %}
+            {% for transaction in transactions %}
+                <tr>
+                    {% if transaction.sender == user.username %}
+                        <td>{{ transaction.recipient|default:"-" }}</td>
+                        <td>{{ transaction.date_created }}</td>
+                        <td>{{ transaction.amount|floatformat:2 }} {{ user.balance.currency }}</td>
+                        <td class="d-none">{% if transaction.transaction_type == 'DR' %}Debit{% else %}Credit{% endif %}</td>
+                        <td>Debit</td>
+                    {% elif transaction.recipient == user.username %}
+                        <td>{{ transaction.sender|default:"-" }}</td>
+                        <td>{{ transaction.date_created }}</td>
+                        <td>{{ transaction.amount|floatformat:2 }} {{ user.balance.currency }}</td>
+                        <td class="d-none">{% if transaction.transaction_type == 'DR' %}Debit{% else %}Credit{% endif %}</td>
+                        <td>Credit</td>
+                    {% elif transaction.fund_sender == user %}
+                        <td>{{ transaction.fund_requester|default:"-" }}</td>
+                        <td>{{ transaction.created_at|date:"F j, Y, g:i a" }}</td>
+                        <td>{{ transaction.amount|floatformat:2 }} {{ user.balance.currency }}</td>
+                        <td class="d-none">Fund Request</td>
+                        <td>Debit - FR</td>
+                    {% elif transaction.fund_requester == user %}
+                        <td>{{ transaction.fund_sender.username|default:"-" }}</td>
+                        <td>{{ transaction.created_at|date:"F j, Y, g:i a" }}</td>
+                        <td>{{ transaction.amount|floatformat:2 }} {{ user.balance.currency }}</td>
+                        <td class="d-none">Fund Request</td>
+                        <td>Credit - FR</td>
+
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        {% endif %}
+        <tr>
+            <td colspan="2">&nbsp;</td> <!-- empty cells to span the main table columns -->
+            <td colspan="2">
+                <table class="table table-bordered table-striped table-hover table-dark">
+                    <tr>
+                        <td><strong>Current Balance:</strong></td>
+                        <td><strong>{{ user.balance.balance }} {{ user.balance.currency }}</strong></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}

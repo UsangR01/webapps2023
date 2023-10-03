@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Login to an Account
+{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="card mx-auto mt-3" style="max-width: 500px;">
+        <div class="card-body">
+            <h1 class="card-title">Login</h1>
+            <form method="post" class="form-group">
+                {% csrf_token %}
+                {{ login_user|crispy }}
+                <button type="submit" class="btn btn-success btn-block mb-3" style="width: 100%;">Login</button>
+            </form>
+            <hr>
+            <button class="btn btn-primary btn-block" type="submit"
+                    onclick="location.href='{% url 'social:begin' 'facebook' %}?next={{ request.path }}&{{ facebook_app_id }}&scope=email'">
+                Login with Facebook
+            </button>
+
+            <div class="text-center">
+                <a href="{% url 'password_reset' %}">Forgot password?</a>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="text-center">
+                <p>Don't have an account?</p>
+                <a href="/register" class="btn btn-primary btn-block">Signup</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

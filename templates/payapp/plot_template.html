@@ -1,0 +1,80 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Analytic Report
+{% endblock %}
+
+{% block navbar %}
+    {% if display_navbar %}
+        <!--Navbar, bg-light-->
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0047ab;">
+            <div class="container">
+                <a href="#" class="navbar-brand mb-0 h1">
+                    <img
+                            src="https://play-lh.googleusercontent.com/6IJdDHeeKzYPaIV7eNi4ohNZpDGsRg_S3FgE2rbf8caqx32YSfTCAERMIhg8FqSdFuI"
+                            width="60" height="60" />
+                    PayApp
+                </a>
+                <!--class="d-inline-block align-top" Add this class after the <img tag. This could be used to align the image to the top-->
+
+                <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarText"
+                        aria-controls="navbarText"
+                        aria-expanded="False"
+                        aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarText">
+                    <ul class="navbar-nav">
+
+                        {% if user.is_authenticated %}
+                            <li class="nav-item active" style="margin-right: 10px;">
+                                <a href="/summary" class="btn btn-primary btn-block" style="background-color: #0047ab;">Dashboard</a>
+                            </li>
+                            <li class="nav-item active" style="margin-right: 10px;">
+                                <a href="/send&request" class="btn btn-primary btn-block" style="background-color: #0047ab;">Send & Request</a>
+                            </li>
+                            <li class="nav-item active" style="margin-right: 10px;">
+                                <a href="/transactionhistory" class="btn btn-primary btn-block" style="background-color: #0047ab;">Activity</a>
+                            </li>
+                            </ul>
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item active" style="margin-right: 10px;">
+                                    <a href="#" class="nav-link"><i class="bi bi-gear"></i></a>
+                                </li>
+                                <li class="nav-item active" style="margin-right: 10px;">
+                                    <a href="/logout" class="btn btn-primary btn-block" style="background-color: #0047ab;">Logout</a>
+                                </li>
+                                <li class="nav-item active" style="margin-right: 10px;">
+                                    <a href="#" class="btn btn-primary btn-block" style="background-color: #0047ab;">Welcome, {{user.username}}</a>
+                                </li>
+                            </ul>
+
+                        {% else %}
+
+                            <li class="nav-item">
+                                <a href="/login" class="btn btn-primary btn-block">Login</a>
+                            </li>
+
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Your content for the chart goes here -->
+                {{ plot_html | safe }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

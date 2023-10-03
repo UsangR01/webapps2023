@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h1>Pending Fund Requests</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for request in pending_requests %}
+            <tr>
+                <td>{{ request.created_at|date }}</td>
+                <td>{{ request.amount }}</td>
+                <td>{{ request.currency }}</td>
+                <td>{{ request.fund_requester.username }} is requesting funds</td>
+                <td>{{ request.get_status_display }}</td>
+                <td>
+                    <form method="POST" action="{% url 'fund_request_action' request.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="approve">
+                        <button type="submit">Approve</button>
+                    </form>
+                    <form method="POST" action="{% url 'fund_request_action' request.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="decline">
+                        <button type="submit">Decline</button>
+                    </form>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="6">No pending fund requests.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
